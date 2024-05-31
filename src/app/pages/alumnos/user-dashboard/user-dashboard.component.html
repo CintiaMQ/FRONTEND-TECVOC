@@ -1,0 +1,66 @@
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <app-sidebar [isCollapsed]="isCollapsed" [isMenuOpen]="isMenuOpen" (toggleSidebar)="toggleSidebar()" (toggleMenu)="toggleMenu()"></app-sidebar>
+
+  <!-- Main Content -->
+  <div [ngClass]="{'flex-1 p-8 bg-gray-100 text-gray-900 transition-all duration-300': true, 'ml-20': isCollapsed, 'ml-64': !isCollapsed}">
+    <!-- Navbar -->
+    <header class="flex items-center justify-between p-8 bg-indigo-600 text-white rounded-lg shadow-lg mb-8 w-full">
+      <div class="flex items-center space-x-4">
+        <button class="md:hidden text-white" (click)="toggleMenu()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+        <h1 class="text-2xl font-bold text-white ml-4 md:ml-0">User Dashboard</h1>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center">
+          <img
+            src="https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg"
+            alt="Profile"
+            class="w-10 h-10 rounded-full"
+          />
+          <span class="ml-2">{{ userName }}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Welcome Banner -->
+    <div class="flex items-center justify-between p-8 bg-gray-300 text-gray-800 rounded-lg  mb-8 h-48">
+      <div>
+        <h1 class="text-4xl font-bold text-indigo-800">Bienvenido, {{ userName }}</h1>
+        <p class="text-lg">¿Listo para comenzar con tus test vocacional?</p>
+      </div>
+      <div class="hidden md:block">
+        <img
+          src="https://i.pinimg.com/564x/76/f2/9e/76f29e41dfc58dfb12a5c0a534bd731e.jpg" 
+          alt="Welcome Illustration"
+          class="w-40 h-auto"
+        />
+      </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <main class="bg-white p-6 rounded-lg shadow-inner flex-grow">
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Progreso Reciente</h2>
+        <div class="bg-gray-100 p-4 rounded-lg shadow">
+          <!-- Agrega aquí gráficos o barras de progreso -->
+        </div>
+      </section>
+      <section class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">Últimos Tests</h2>
+        <div class="bg-gray-100 p-4 rounded-lg shadow">
+          <!-- Agrega aquí una lista de los últimos tests tomados -->
+        </div>
+      </section>
+      <section class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">Noticias y Anuncios</h2>
+        <div class="bg-gray-100 p-4 rounded-lg shadow">
+          <!-- Agrega aquí las noticias y anuncios -->
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

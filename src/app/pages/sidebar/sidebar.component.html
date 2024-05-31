@@ -1,0 +1,51 @@
+<ng-container *ngIf="isSidebarVisible">
+  <div
+    [ngClass]="{
+      'h-screen bg-indigo-600 text-white transition-all duration-300 flex flex-col': true,
+      'w-20 hover:w-64': isCollapsed,
+      'w-64': !isCollapsed,
+      'fixed z-50 inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0': true,
+      'translate-x-0': isMenuOpen
+    }"
+  >
+    <div class="flex items-center justify-between p-6">
+      <h1 [ngClass]="{'text-3xl font-semibold': true, 'hidden': isCollapsed, 'block': !isCollapsed}">TECVOC</h1>
+    </div>
+    <div class="flex items-center justify-center mt-10">
+      <img
+        src="https://png.pngtree.com/background/20230519/original/pngtree-young-woman-anime-cartoon-drawing-picture-image_2660945.jpg"
+        alt="Profile"
+        class="w-10 h-10 rounded-full"
+      />
+      <span *ngIf="!isCollapsed" class="ml-2">{{ userName }}</span>
+    </div>
+    <nav class="mt-10 flex-grow">
+      <a *ngIf="userRole === 'user'" routerLink="/inicio" class="sidebar-item flex items-center py-4 px-6 text-gray-300 hover:bg-indigo-400 hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
+        <fa-icon [icon]="['fas', 'home']" class="mr-2"></fa-icon>
+        <span *ngIf="!isCollapsed" class="mx-4 font-medium">Inicio</span>
+      </a>
+      <a *ngIf="userRole === 'user'" routerLink="/test" class="sidebar-item flex items-center py-4 px-6 text-gray-300 hover:bg-indigo-400 hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
+        <fa-icon [icon]="['fas', 'list']" class="mr-2"></fa-icon>
+        <span *ngIf="!isCollapsed" class="mx-4 font-medium">Test</span>
+      </a>
+      <a *ngIf="userRole === 'user'" routerLink="/resultados" class="sidebar-item flex items-center py-4 px-6 text-gray-300 hover:bg-indigo-400 hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
+        <fa-icon [icon]="['fas', 'file-alt']" class="mr-2"></fa-icon>
+        <span *ngIf="!isCollapsed" class="mx-4 font-medium">Resultados</span>
+      </a>
+      <a *ngIf="userRole === 'user'" routerLink="/videos" class="sidebar-item flex items-center py-4 px-6 text-gray-300 hover:bg-indigo-400 hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
+        <fa-icon [icon]="['fas', 'video']" class="mr-2"></fa-icon>
+        <span *ngIf="!isCollapsed" class="mx-4 font-medium">Videos</span>
+      </a>
+      <a *ngIf="userRole === 'admin'" routerLink="/cuestionarios" class="sidebar-item flex items-center py-4 px-6 text-gray-300 hover:bg-indigo-400 hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
+        <fa-icon [icon]="['fas', 'tasks']" class="mr-2"></fa-icon>
+        <span *ngIf="!isCollapsed" class="mx-4 font-medium">Cuestionarios</span>
+      </a>
+    </nav>
+    <div class="mt-auto mb-4">
+      <button (click)="logout()" class="sidebar-item flex items-center py-2 px-6 text-gray-300 hover:bg-indigo-400 w-full hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
+        <fa-icon [icon]="['fas', 'sign-out-alt']" class="mr-2"></fa-icon>
+        <span *ngIf="!isCollapsed" class="mx-4 font-medium">Cerrar sesión</span>
+      </button>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,71 @@
+<!-- user-dashboard -->
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+<div style="background-color: blue; padding: 20px; color: white;">
+    <h2 style="background-color: blue;">Cuestionarios</h2>
+    <table style="width: 100%; border-collapse: collapse; background-color: blue;">
+      <thead>
+        <tr style="background-color: blue;">
+          <th style="border: 1px solid white; padding: 8px;">ID</th>
+          <th style="border: 1px solid white; padding: 8px;">Nombre</th>
+          <th style="border: 1px solid white; padding: 8px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody style="background-color: blue;">
+        <tr *ngFor="let cuestionario of cuestionarios" style="background-color: blue;">
+          <td style="border: 1px solid white; padding: 8px;">{{ cuestionario._id }}</td>
+          <td style="border: 1px solid white; padding: 8px;">{{ cuestionario.nombre }}</td>
+          <td style="border: 1px solid white; padding: 8px;">
+            <button (click)="editCuestionario(cuestionario)" style="background-color: rgb(92, 77, 77); color: blue;">Editar</button>
+            <button (click)="deleteCuestionario(cuestionario._id)" style="background-color: rgb(92, 77, 77); color: blue;">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="selectedCuestionario" style="background-color: blue; padding: 20px; margin-top: 20px;background-color: rgb(92, 77, 77); color: white;">
+      <h2>{{ selectedCuestionario._id ? 'Editar Cuestionario' : 'Crear Cuestionario' }}</h2>
+      <form (ngSubmit)="saveCuestionario()">
+        <div>
+          <label for="nombre">Nombre:</label>
+          <input id="nombre" [(ngModel)]="selectedCuestionario.nombre" name="nombre" required style="width: 100%; padding: 8px; background-color: rgb(92, 77, 77);margin: 8px 0;" />
+        </div>
+        
+        <div *ngFor="let pregunta of selectedCuestionario.Preguntas; let i = index">
+          <h3>Pregunta {{i + 1}}</h3>
+          <label for="texto-{{i}}">Texto:</label>
+          <input id="texto-{{i}}" [(ngModel)]="pregunta.texto" name="texto-{{i}}" required style="width: 100%; padding: 8px;background-color: rgb(92, 77, 77); margin: 8px 0;" />
+  
+          <div *ngFor="let opcion of pregunta.opciones; let j = index">
+            <label for="opcion-texto-{{i}}-{{j}}">Opción Texto:</label>
+            <input id="opcion-texto-{{i}}-{{j}}" [(ngModel)]="opcion.texto" name="opcion-texto-{{i}}-{{j}}" required style="width: 100%; padding: 8px; background-color: rgb(92, 77, 77);margin: 8px 0;" />
+            
+            <label for="opcion-valor-{{i}}-{{j}}">Opción Valor:</label>
+            <input id="opcion-valor-{{i}}-{{j}}" [(ngModel)]="opcion.valor" name="opcion-valor-{{i}}-{{j}}" required style="width: 100%; padding: 8px; background-color: rgb(92, 77, 77);margin: 8px 0;" />
+          </div>
+        </div>
+  
+        <div *ngFor="let carrera of selectedCuestionario.Carreras; let k = index">
+          <h3>Carrera {{k + 1}}</h3>
+          <label for="carrera-nombre-{{k}}">Nombre:</label>
+          <input id="carrera-nombre-{{k}}" [(ngModel)]="carrera.nombre" name="carrera-nombre-{{k}}" required style="width: 100%;background-color: rgb(92, 77, 77); padding: 8px; margin: 8px 0;" />
+  
+          <div *ngFor="let criterio of carrera.criterios; let l = index">
+            <label for="criterio-pregunta-{{k}}-{{l}}">Pregunta:</label>
+            <input id="criterio-pregunta-{{k}}-{{l}}" [(ngModel)]="criterio.pregunta" name="criterio-pregunta-{{k}}-{{l}}" required style="width: 100%; padding: 8px;background-color: rgb(92, 77, 77); margin: 8px 0;" />
+  
+            <label for="criterio-respuesta-{{k}}-{{l}}">Respuesta:</label>
+            <input id="criterio-respuesta-{{k}}-{{l}}" [(ngModel)]="criterio.respuesta" name="criterio-respuesta-{{k}}-{{l}}" required style="width: 100%; padding: 8px; background-color: rgb(92, 77, 77);margin: 8px 0;" />
+  
+            <label for="criterio-puntaje-{{k}}-{{l}}">Puntaje:</label>
+            <input  id="criterio-puntaje-{{k}}-{{l}}" [(ngModel)]="criterio.puntaje" name="criterio-puntaje-{{k}}-{{l}}" required  style="width: 100%;background-color: rgb(92, 77, 77); padding: 8px; margin: 8px 0;" />
+          </div>
+        </div>
+  
+        <button type="submit" style="background-color: rgb(92, 77, 77); color: blue; padding: 8px 16px; margin-right: 8px;">Guardar</button>
+        <button type="button" (click)="cancelEdit()" style="background-color: rgb(92, 77, 77); color: blue; padding: 8px 16px;">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  </div>

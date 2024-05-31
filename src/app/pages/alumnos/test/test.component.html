@@ -1,0 +1,68 @@
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+
+  <!-- Main Content -->
+  <div class="flex flex-col flex-grow bg-white">
+    <!-- Navbar -->
+    <header class="flex items-center justify-between p-8  bg-indigo-600 text-white shadow-lg mb-8 w-full">
+      <h1 class="text-2xl font-bold text-white">User Dashboard</h1>
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center">
+          <img
+            src="https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg"
+            alt="Profile"
+            class="w-10 h-10 rounded-full"
+          />
+          <span class="ml-2">{{ userName }}</span>
+        </div>
+      </div>
+    </header>
+
+    
+    <!-- Dashboard Content -->
+    <main class="bg-white p-9 rounded-lg flex-grow max-w-4xl mx-auto">
+      <section>
+        <div *ngIf="userName">
+          <h1 class="text-slate-950 text-3xl font-bold text-indigo-100">Bienvenido, {{ userName }}</h1>
+        </div>
+        <div *ngIf="!userName">
+          <p>Cargando...</p>
+        </div>
+        <div *ngIf="cuestionarios && !showResult">
+          <h2 class="text-lg font-semibold text-indigo-700">Test Vocacional</h2>
+          <!-- Progreso del test -->
+          <div class="flex space-x-1 my-8">
+            <div *ngFor="let question of cuestionarios[0].Preguntas; let i = index" 
+                class="h-2 flex-1 rounded-full"
+                [ngClass]="{'bg-blue-600': i <= currentQuestionIndex, 'bg-gray-300': i > currentQuestionIndex}">
+            </div>
+          </div>
+          <div *ngFor="let pregunta of cuestionarios[0].Preguntas; let i = index" [hidden]="i !== currentQuestionIndex">
+            <h2 class="text-xl font-semibold text-gray-800">{{ pregunta.texto }}</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+              <div *ngFor="let opcion of pregunta.opciones" class="flex items-center p-4 border rounded-lg hover:shadow-lg transition duration-150 ease-in-out cursor-pointer" (click)="selectAnswer(pregunta.id, opcion.valor)">
+                <input type="radio" name="question-{{i}}" class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out mr-2">
+                <span class="text-gray-700">{{ opcion.texto }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 text-center">
+            <button (click)="nextQuestion()" class="bg-indigo-600 text-white px-4 py-2 rounded-full shadow-md hover:bg-indigo-700">Next Question</button>
+          </div>
+        </div>
+        <div *ngIf="showResult" class="flex flex-col items-center justify-center mt-8">
+          <h2 class="text-3xl font-bold text-indigo-700">¡Felicitaciones!</h2>
+          <h3 class="text-xl font-medium text-gray-800 mt-2">Test Vocacional</h3>
+          <p class="text-gray-700 mt-4">Respondiste correctamente</p>
+          <p class="text-2xl font-semibold text-indigo-700">{{ correctAnswers }} / {{ totalQuestions }}</p>
+          <h3 class="text-xl font-medium text-gray-800 mt-4">Carrera recomendada: {{ recommendedCareer }}</h3>
+          <div class="flex space-x-4 mt-6">
+            <button (click)="restartTest()" class="bg-indigo-600 text-white px-6 py-2 rounded-full shadow-md hover:bg-indigo-700">Volver a intentar</button>
+            <button (click)="goHome()" class="bg-white border border-indigo-600 text-indigo-600 px-6 py-2 rounded-full shadow-md hover:bg-gray-100">Volver al inicio</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

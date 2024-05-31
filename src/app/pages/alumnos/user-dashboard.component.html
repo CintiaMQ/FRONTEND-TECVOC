@@ -1,0 +1,47 @@
+<!-- user-dashboard -->
+<div class="flex min-h-screen bg-gray-100">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+  
+    <!-- Main Content -->
+    <div [ngClass]="{'flex-1 p-8 bg-gray-100 text-gray-900 transition-all duration-300': true, 'ml-20': isCollapsed, 'ml-1': !isCollapsed}">
+      <!-- Navbar -->
+      <header class="flex items-center justify-between p-6 bg-indigo-600 text-white rounded-lg shadow-lg mb-8">
+        <h1 class="text-2xl font-bold">User Dashboard</h1>
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center">
+            <img
+              src="https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg"
+              alt="Profile"
+              class="w-10 h-10 rounded-full"
+            />
+            <span class="ml-2">{{ userName }}</span>
+          </div>
+        </div>
+      </header>
+  
+      <!-- Dashboard Content -->
+      <main class="bg-white p-6 rounded-lg shadow-inner flex-grow">
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Bienvenido, {{ userName }}</h2>
+          <p class="mb-6">Aquí tienes un resumen de tu actividad reciente:</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-100 p-4 rounded-lg shadow">
+              <h3 class="text-lg font-medium">Progreso Reciente</h3>
+              <!-- Agrega aquí gráficos o barras de progreso -->
+            </div>
+            <div class="bg-gray-100 p-4 rounded-lg shadow">
+              <h3 class="text-lg font-medium">Últimos Tests</h3>
+              <!-- Agrega aquí una lista de los últimos tests tomados -->
+            </div>
+          </div>
+        </section>
+        <section class="mt-8">
+          <h3 class="text-lg font-medium mb-4">Noticias y Anuncios</h3>
+          <div class="bg-gray-100 p-4 rounded-lg shadow">
+            <!-- Agrega aquí las noticias y anuncios -->
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>

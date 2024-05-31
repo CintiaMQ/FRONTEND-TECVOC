@@ -1,0 +1,92 @@
+<!-- Asegúrate de que la imagen esté en src/assets/images/tu-imagen-de-fondo.jpg -->
+<div class="flex items-center justify-center min-h-screen bg-cover bg-center" style="background-image: url('https://gamemath.ec/wp-content/uploads/2021/03/fondo-login.png');">
+  <div class="w-full max-w-md p-8 space-y-8 bg-white bg-opacity-90 rounded-lg shadow-lg">
+    <div class="text-center">
+      <img 
+        class="w-16 h-16 mx-auto" 
+        src="assets/images/logo.png" 
+        alt="Logo"
+      />
+      <h2 class="mt-6 text-3xl font-extrabold text-blue-400">TECVOC</h2>
+    </div>
+    <div class="flex justify-center mt-4">
+      <button class="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm hover:bg-gray-100 text-gray-900">
+        <img style="height: 20px; width: 20px;" class="google-logo mr-2" src="https://www.svgrepo.com/show/355037/google.svg" alt="Google Logo"/>
+        Inicia sesión con Google
+      </button>
+    </div>
+    <div class="relative flex items-center justify-center mt-6">
+      <div class="absolute w-full border-t border-gray-300"></div>
+      <span class="relative px-2 text-sm text-gray-500 bg-white">o inicia sesión con</span>
+    </div>
+    <form class="space-y-6" (submit)="handleLogin($event)">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-900">
+          Usuario
+        </label>
+        <div class="mt-1">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            [(ngModel)]="email"
+            required
+            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900"
+            placeholder="Correo electrónico"
+          />
+        </div>
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-900">
+          Contraseña
+        </label>
+        <div class="mt-1">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            [(ngModel)]="password"
+            required
+            class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900"
+            placeholder="Contraseña"
+          />
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input
+            id="remember-me"
+            name="remember-me"
+            type="checkbox"
+            class="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+          />
+          <label for="remember-me" class="block ml-2 text-sm text-gray-900">
+            Recuerda este dispositivo
+          </label>
+        </div>
+        <div class="text-sm">
+          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+            ¿Has olvidado tu contraseña?
+          </a>
+        </div>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Iniciar sesión
+        </button>
+      </div>
+      <div class="text-sm text-center">
+        <a
+          href="#"
+          class="font-medium text-indigo-600 hover:text-indigo-500"
+          (click)="handleRegisterRedirect()"
+        >
+          Crea una cuenta
+        </a>
+      </div>
+    </form>
+  </div>
+</div>

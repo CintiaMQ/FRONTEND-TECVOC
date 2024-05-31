@@ -1,0 +1,36 @@
+.sidebar-item {
+  position: relative;
+  border-radius: 0;
+  margin: 0 -7px; /* Ajusta el margen negativo para crear el efecto sobresaliente */
+  padding-left: 50px; /* Ajusta el padding según sea necesario */
+}
+
+.sidebar-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -20px;
+  height: 100%;
+  width: 20px;
+  background-color: inherit;
+  border-radius: 0 50px 10px 0;
+}
+
+.sidebar-item:hover {
+  background-color: #f7f7f7; /* Cambia esto al color deseado */
+  color: #4C51BF; /* Cambia esto al color de texto deseado */
+  border-radius: 0 10px 10px 0;
+}
+
+.sidebar-item:hover::before {
+  background-color: #E0E7FF; /* Asegúrate de que coincida con el color del hover */
+}
+@media (min-width: 768px) {
+  .md\:relative {
+    position: relative;
+  }
+
+  .md\:translate-x-0 {
+    transform: translateX(0);
+  }
+}
