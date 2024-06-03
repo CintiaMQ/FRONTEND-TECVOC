@@ -1,0 +1,19 @@
+/* styles.css */
+:host {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex: 1;
+    transition: margin-left 0.3s;
+  }
+  
+  .main-content.collapsed {
+    margin-left: 5rem; /* Ajusta esto según el ancho de tu sidebar colapsado */
+  }
+  
+  .main-content.expanded {
+    margin-left: 16rem; /* Ajusta esto según el ancho de tu sidebar expandido */
+  }
+  

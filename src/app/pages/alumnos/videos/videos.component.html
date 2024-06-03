@@ -1,9 +1,40 @@
+<!-- videos.component.html -->
+<div class="flex min-h-screen">
+  <!-- Sidebar -->
+  <app-sidebar 
+    [isCollapsed]="isCollapsed" 
+    [isMenuOpen]="isMenuOpen" 
+    (toggleSidebar)="toggleSidebar()" 
+    (toggleMenu)="toggleMenu()">
+  </app-sidebar>
 
-<div *ngIf="userName">
-    <h1 style="background-color: black;">Bienvenido video, {{ userName }}</h1>
-    <!-- Aquí puedes agregar el contenido de tu componente Test -->
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col items-center justify-center bg-gradient-to-r from-gray-200 to-gray-300">
+    <div *ngIf="userName" class="w-full">
+      <h1 class="bg-gray-800 text-white py-4 px-8 rounded-lg shadow-lg text-2xl text-center">
+        Bienvenido(a), {{ userName }}
+      </h1>
+      <div class="mt-8">
+        <h2 class="text-xl mb-4 text-center">Videos relacionados con tu carrera</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div *ngFor="let video of careerVideos" class="w-full">
+            <iframe class="w-full h-64" [src]="getVideoUrl(video.id.videoId)" frameborder="0" allowfullscreen></iframe>
+            <p class="mt-2">{{ video.snippet.title }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8">
+        <h2 class="text-xl mb-4 text-center">Videos subidos por Tecsup</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div *ngFor="let video of tecsupVideos" class="w-full">
+            <iframe class="w-full h-64" [src]="getVideoUrl(video.id.videoId)" frameborder="0" allowfullscreen></iframe>
+            <p class="mt-2">{{ video.snippet.title }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!userName" class="flex items-center justify-center min-h-screen bg-gray-100 w-full">
+      <p class="text-gray-800 text-xl">Cargando...</p>
+    </div>
   </div>
-  <div *ngIf="!userName">
-    <p>Cargando...</p>
-  </div>
-  
+</div>

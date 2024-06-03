@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* styles.css */
+.logo-container {
+    display: flex;
+    align-items: center;
+    width: 200px; /* Ajusta este valor según sea necesario para el ancho */
+    height: 100px; /* Ajusta este valor según sea necesario para la altura */
+  }
+  
+  .logo {
+    width: 80%; /* Ajusta para que ocupe todo el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+  }
