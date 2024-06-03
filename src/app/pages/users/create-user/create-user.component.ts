@@ -43,7 +43,7 @@ export class CreateUserComponent {
         localStorage.setItem('token', token);
         localStorage.setItem('role', role);
         localStorage.setItem('userName', userName);
-        this.router.navigate([this.role === 'admin' ? '/user-dashboard' : '/user-dashboard']);
+        this.router.navigate([this.role === 'admin' ? '/dashboard' : '/user-dashboard']);
       }, error => {
         console.error('Error registering user:', error);
         alert('Error registering user');

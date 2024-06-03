@@ -10,6 +10,7 @@ import { ResultadosComponent } from './pages/alumnos/resultados/resultados.compo
 import { AuthGuard } from './auth.guard';
 import { CuestionariosComponent } from './pages/admin/cuestionarios/cuestionarios.component';
 import { UsuariosComponent } from './pages/admin/usuarios/usuarios.component';
+import { DashbaordComponent } from './pages/admin/dashbaord/dashbaord.component';
 
 const routesInicio: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,7 @@ const routesInicio: Routes = [
   { path: '', component: InicioComponent, canActivate: [AuthGuard] },
   { path: 'cuestionarios', component: CuestionariosComponent },
   { path: 'usuarios', component: UsuariosComponent },
+  { path: 'dashboard', component: DashbaordComponent },
   { path: '', redirectTo: '', pathMatch: 'full'}
   
 ];

@@ -1,1 +1,95 @@
-<p>dashbaord works!</p>
+<div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <app-sidebar [isCollapsed]="isCollapsed" [isMenuOpen]="isMenuOpen" (toggleSidebar)="toggleSidebar()"
+        (toggleMenu)="toggleMenu()">
+    </app-sidebar>
+
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1 p-4 bg-gray-100 text-gray-900 transition-all duration-300"
+        [ngClass]="{'ml-20': isCollapsed, 'ml-64': !isCollapsed}">
+        <!-- Navbar -->
+        <header class="flex items-center justify-between p-4 bg-indigo-600 text-white rounded-lg shadow-lg mb-4">
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-white" (click)="toggleMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <h1 class="text-2xl font-bold text-white">User Dashboard</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center">
+                    <img src="https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg"
+                        alt="Profile" class="w-10 h-10 rounded-full" />
+                    <span class="ml-2">{{ userName }}</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Welcome Banner -->
+        <div class="flex items-center justify-between p-4 bg-gray-300 text-gray-800 rounded-lg mb-4 h-auto md:h-48">
+            <div>
+                <h1 class="text-2xl md:text-4xl font-bold text-indigo-800">Bienvenido, {{ userName }}</h1>
+                <p class="text-lg">¿Listo para comenzar con tus test vocacional?</p>
+            </div>
+            <div class="hidden md:block">
+                <img src="https://i.pinimg.com/564x/76/f2/9e/76f29e41dfc58dfb12a5c0a534bd731e.jpg"
+                    alt="Welcome Illustration" class="w-24 md:w-40 h-auto" />
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <main class="bg-white p-4 rounded-lg shadow-inner flex-grow">
+            <section class="mb-8">
+
+              <!-- dashbaord.component.html -->
+<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4 text-light-blue">Dashboard</h2>
+  
+    <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+      <h5 class="text-xl font-semibold text-light-blue">Total de Usuarios</h5>
+      <p class="text-lg text-light-blue">{{ totalUsuarios }}</p>
+    </div>
+  
+    <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+      <h5 class="text-xl font-semibold cursor-pointer text-light-blue" (click)="toggleSemanaUsuarios()">
+        Usuarios Registrados en la Última Semana
+        <span class="ml-2">{{ showSemanaUsuarios ? '▲' : '▼' }}</span>
+        <p class="text-lg text-light-blue">{{ usuariosUltimaSemana.length }}</p>
+      </h5>
+      <div *ngIf="showSemanaUsuarios" class="mt-2">
+       
+        <ul class="list-disc ml-6 mt-2 text-light-blue">
+          <li *ngFor="let usuario of usuariosUltimaSemana">
+            {{ usuario.email }} - {{ usuario.createdAt | date }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+      <h5 class="text-xl font-semibold cursor-pointer text-light-blue" (click)="toggleMesUsuarios()">
+        Usuarios Registrados en el Último Mes
+        <span class="ml-2">{{ showMesUsuarios ? '▲' : '▼' }}</span>
+        <p class="text-lg text-light-blue">{{ usuariosUltimoMes.length }}</p>
+      </h5>
+      <div *ngIf="showMesUsuarios" class="mt-2">
+   
+        <ul class="list-disc ml-6 mt-2 text-light-blue">
+          <li *ngFor="let usuario of usuariosUltimoMes">
+            {{ usuario.email }} - {{ usuario.createdAt | date }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+            </section>
+        </main>
+    </div>
+</div>
