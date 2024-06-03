@@ -1,1 +1,141 @@
-<p>usuarios works!</p>
+<!-- user-dashboard.component.html -->
+<div class="flex min-h-screen">
+    <!-- Sidebar -->
+    <app-sidebar [isCollapsed]="isCollapsed" [isMenuOpen]="isMenuOpen" (toggleSidebar)="toggleSidebar()"
+        (toggleMenu)="toggleMenu()">
+    </app-sidebar>
+
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1 p-4 bg-gray-100 text-gray-900 transition-all duration-300"
+        [ngClass]="{'ml-20': isCollapsed, 'ml-64': !isCollapsed}">
+        <!-- Navbar -->
+        <header class="flex items-center justify-between p-4 bg-indigo-600 text-white rounded-lg shadow-lg mb-4">
+            <div class="flex items-center space-x-4">
+                <button class="md:hidden text-white" (click)="toggleMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <h1 class="text-2xl font-bold text-white">User Dashboard</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex items-center">
+                    <img src="https://pub-static.fotor.com/assets/projects/pages/d5bdd0513a0740a8a38752dbc32586d0/fotor-03d1a91a0cec4542927f53c87e0599f6.jpg"
+                        alt="Profile" class="w-10 h-10 rounded-full" />
+                    <span class="ml-2">{{ userName }}</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Welcome Banner -->
+        <div class="flex items-center justify-between p-4 bg-gray-300 text-gray-800 rounded-lg mb-4 h-auto md:h-48">
+            <div>
+                <h1 class="text-2xl md:text-4xl font-bold text-indigo-800">Bienvenido, {{ userName }}</h1>
+                <p class="text-lg">¿Listo para comenzar con tus test vocacional?</p>
+            </div>
+            <div class="hidden md:block">
+                <img src="https://i.pinimg.com/564x/76/f2/9e/76f29e41dfc58dfb12a5c0a534bd731e.jpg"
+                    alt="Welcome Illustration" class="w-24 md:w-40 h-auto" />
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <main class="bg-white p-4 rounded-lg shadow-inner flex-grow">
+            <section class="mb-8">
+                <div class="container">
+                    <h2>Lista de Usuarios</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Age</th>
+                                <th>Education Level</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let usuario of usuarios">
+                                <td>{{ usuario.email }}</td>
+                                <td>{{ usuario.role }}</td>
+                                <td>{{ usuario.name }}</td>
+                                <td>{{ usuario.surname }}</td>
+                                <td>{{ usuario.age }}</td>
+                                <td>{{ usuario.educationLevel }}</td>
+                                <td>
+                                    <button (click)="selectUsuario(usuario)" class="btn btn-info">Detalles</button>
+                                    <button (click)="editUsuario(usuario)" class="btn btn-warning">Editar</button>
+                                    <button (click)="deleteUsuario(usuario._id)"
+                                        class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div *ngIf="selectedUsuario">
+                        <h2 *ngIf="isEditing">Editar Usuario</h2>
+                        <h2 *ngIf="!isEditing">Detalles del Usuario</h2>
+
+                        <form *ngIf="isEditing" (ngSubmit)="saveUsuario()">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input [(ngModel)]="selectedUsuario.email" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Password:</label>
+                                <input [(ngModel)]="selectedUsuario.password" name="password" type="password"
+                                    class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Role:</label>
+                                <select [(ngModel)]="selectedUsuario.role" name="role" class="form-control" required>
+                                    <option value="user">User</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input [(ngModel)]="selectedUsuario.name" name="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Surname:</label>
+                                <input [(ngModel)]="selectedUsuario.surname" name="surname" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Age:</label>
+                                <input [(ngModel)]="selectedUsuario.age" name="age" type="number" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Education Level:</label>
+                                <input [(ngModel)]="selectedUsuario.educationLevel" name="educationLevel"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Accept Terms:</label>
+                                <input [(ngModel)]="selectedUsuario.acceptTerms" name="acceptTerms" type="checkbox"
+                                    class="form-check-input">
+                            </div>
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                            <button type="button" (click)="clearSelection()" class="btn btn-secondary">Cancelar</button>
+                        </form>
+
+                        <div *ngIf="!isEditing">
+                            <p><strong>Email:</strong> {{ selectedUsuario.email }}</p>
+                            <p><strong>Role:</strong> {{ selectedUsuario.role }}</p>
+                            <p><strong>Name:</strong> {{ selectedUsuario.name }}</p>
+                            <p><strong>Surname:</strong> {{ selectedUsuario.surname }}</p>
+                            <p><strong>Age:</strong> {{ selectedUsuario.age }}</p>
+                            <p><strong>Education Level:</strong> {{ selectedUsuario.educationLevel }}</p>
+                            <p><strong>Accept Terms:</strong> {{ selectedUsuario.acceptTerms }}</p>
+                            <button type="button" (click)="clearSelection()" class="btn btn-secondary">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>

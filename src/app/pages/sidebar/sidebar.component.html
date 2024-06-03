@@ -40,6 +40,10 @@
         <fa-icon [icon]="['fas', 'tasks']" class="mr-2"></fa-icon>
         <span *ngIf="!isCollapsed" class="mx-4 font-medium">Cuestionarios</span>
       </a>
+      <a *ngIf="userRole === 'admin'" routerLink="/usuarios" class="sidebar-item flex items-center py-4 px-6 text-gray-300 hover:bg-indigo-400 hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
+        <fa-icon [icon]="['fas', 'tasks']" class="mr-2"></fa-icon>
+        <span *ngIf="!isCollapsed" class="mx-4 font-medium">Usuarios</span>
+      </a>
     </nav>
     <div class="mt-auto mb-4">
       <button (click)="logout()" class="sidebar-item flex items-center py-2 px-6 text-gray-300 hover:bg-indigo-400 w-full hover:no-underline focus:no-underline active:no-underline transition-all duration-300">
